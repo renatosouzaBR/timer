@@ -37,22 +37,10 @@ interface CycleProviderProps {
 }
 
 export function CycleProvider({ children }: CycleProviderProps) {
-  const [cyclesState, dispatch] = useReducer(
-    cycleReducers,
-    {
-      cycles: [],
-      activeCycleId: null,
-    },
-    (initialState) => {
-      const storagedCycles = localStorage.getItem('@timer:cycles-state:v1.0.0')
-
-      if (storagedCycles) {
-        return JSON.parse(storagedCycles)
-      }
-
-      return initialState
-    },
-  )
+  const [cyclesState, dispatch] = useReducer(cycleReducers, {
+    cycles: [],
+    activeCycleId: null,
+  })
 
   const { cycles, activeCycleId } = cyclesState
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
